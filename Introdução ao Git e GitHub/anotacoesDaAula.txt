@@ -1,0 +1,96 @@
+git class
+
+> Interação com git
+> Comandos básicos de interação com terminal windows
+   - cd (chance directory - Navegar entre as pastas)
+   cd /    - executa a ação de entrar numa pasta
+   cd ..   - retrocede uma pasta
+   - dir (lista pastas que estão no C:)
+   - mkdir (criar pasta)
+   - del / rmdir (del >> deleta arquivo  rmdir >> deleta pasta com arquivos e tudo:
+   'rmdir workspace /S /Q' ) 
+   - cls ou ctrl+L (limpa o terminal)
+   - TAB (autocompleta nome pastas)
+   - echo (printa uma palavra/frase de volta no terminal)
+    para colocar a palavra/frase printada em um arquivo txt, usar echo + texto > nomearquivo.txt
+    
+> Entendendo o GIT
+   - SHA1 (Secure Hash Algorithm)
+Conjunto de funções hash criptográficas projetadas pela NSA.
+Gera conjunto de caracteres identificador de 40 dígitos únicos.
+No GIT, é uma forma oculta de representar um arquivo, cada vez que eu pedir, vem um conjunto diferente.
+    Abrir GIT BASH > Passar p algoritmo de encriptação usando SHA1:
+    openss1 sha1 texto.txt
+
+   - Objetos fundamentais
+  Blobs (contém metadatos do git nos objetos, tipo obj, tamanho string, outros... guarda o SHA do arquivo)
+
+  Trees (Armazenam blobs, também contém metadatos. responsável por montar toda a estrutura de onde estão os arquivos, mostra o nome do arquivo e contém SHA1 dos metadatos das arvores.)
+
+  Commits (Junta tudo, aponta para uma árvore, aponta para um parente - **ultimo commit realizado antes dele** -, aponta para um autor e aponta para uma mensagem. Leva também horário e data de quando o objeto foi criado. o commit possui um SHA1, se você altera um blob de um arquivo, o sha1 dessa blob altera, que altera os metadatos da árvore, o commit aponta para uma arvore que pode apontar para outra árvore... ou seja, se muda algo, muda tudo, criando uma linha do tempo, um histórico de commits.)
+
+ > São 3 tipos básicos responsáveis pelo versionamento  do código.
+
+   - Sistema distribuído seguro
+Pelo fato dos commits serem extremamente difíceis de serem alterados, cada alteração é gravada em um histórico e indica quem e quando foi que alterou, não há como fazer uma alteração maliciosa sem deixar rastros.
+
+ > Chaves SSH e Tokens
+    Chave SSH - forma de estabelecer uma conexão segura e confiavel entre duas máquinas, usando duas chaves, uma pública e uma privada.
+    A máquina fica gravada para que quando envie código para github não precise por senha. 
+> Para inicializar o SSH agent (entidade encarregada de pegar as chaves e lidar com elas)
+    'eval $(ssh-agent -s)'
+    -- vai gerar um agent pid, starta o projeto.
+    -- para entregar o agent:
+    'ssh-add id_ed25519'
+    -- para clonar seu diretório github na máquina
+    'git clone **código SSH copiado github**
+    (posso buscar esse processo no GitHub Docs, buscar como: Gerar uma nova chave SSH e adicioná-la ao ssh-agent)
+ > Token de acesso pessoal
+    Gerar token no GitHub, guardar em algum lugar, quando usar GIT e pedir senha, posso usar meu token pessoal.   
+     - Na chave SSH cola SSH, no token clona HTTPS.
+
+ > Primeiros comandos com GIT
+    - Iniciar o GIT
+       - git init (inicializar, criar repositório)
+       - git add (mover arquivos e das inicia aos 1º versionamentos)
+       - git commit -m " " (iniciar um commit, pode por uma mensagem entre parentesis.)
+       - git status (status do arquivo)
+       - mv (move arquivo para outro local:
+       'mv nomearquivo.md ./nomepasta/' )
+       - git add * (com o * ou ponto (git add .) pega TUDO que foi modificado no workspace e move para staged.)
+
+**todo comando do git leva a palavra git na frente para chamar o programa que será utilizado.**
+flag para listar pasta oculta: 'ls -a'
+
+> Existem 3 tipos de arquivos:
+
+Markdown (forma + humana de escrever um arquivo HTML, colocar quantidade de # antes para indicar nível título. ... (h1, h2, h3.../ #, ##, ###...))
+
+Navegador3
+HTML
+
+    - Iniciar o versionamento
+    - Criar um commit   
+
+> Ciclo de vida dos arquivos
+     Tracked (Arquivos que o GIT tem ciencia)
+     Untracked (Arquivos que o GIT não tem ciencia deles)
+
+     Staged: Local dos arquivos que estão se preparando para fazer parte de outro tipo de arquivamento. 
+
+     Quando um arquivo é modificado pela primeira vez, passa de ser Unmodified para Modified. O GIT compara o SHA1 e reconhece que houve uma modificação.
+
+     Staged: depois de modificado o arquivo, rodando o git add de novo o arquivo vai para staged e aguarda para entrar/executar ação e fazer parte de outro grupo, próximo passo: commit (envelopar).
+
+     Commit: Depois de dado o commit, ele retorna o arquivo para Unmodified para começar o ciclo de novo. (retorna para dizer que acabaram as alterações dos arquivos, cria um snapshot do código e salva dentro do commit, volta o arquivo pro unmodified e aguarda novas atualizações.)
+
+> Trabalhando com o GITHUB
+    (conectando diretório git/github)
+
+    - git remote add origin 'linkdiretório'
+    - git remote -v (verifica diretorio adicionado)
+
+**Depois de atualizar um repositório, para enviar para o github, usar: 'git push origin master'**
+
+
+
